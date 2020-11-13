@@ -1,0 +1,15 @@
+start:
+	@echo "Start Containers"
+	docker-compose -f ${DOCKER_COMPOSE_FILE} up -d ${DOCKER_SERVICES}
+	sleep 2
+	docker-compose -f ${DOCKER_COMPOSE_FILE} ps
+
+stop:
+	@echo "Stop Containers"
+	docker-compose -f ${DOCKER_COMPOSE_FILE} stop ${DOCKER_SERVICES}
+	sleep 2
+	docker-compose -f ${DOCKER_COMPOSE_FILE} ps
+
+rm: stop
+	@echo "Remove Containers"
+	docker-compose -f ${DOCKER_COMPOSE_FILE} rm -v -f ${DOCKER_SERVICES}
