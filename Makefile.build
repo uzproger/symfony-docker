@@ -1,7 +1,9 @@
-COMPOSER_OPTIONS =
-ifeq ("$(ENV)", "prod")
+COMPOSER_OPTIONS = --dev
+ifeq ("$(ENVIRONMENT)", "production")
 COMPOSER_OPTIONS = --no-dev
 endif
+
+ENV ?= dev
 
 composer-install:
 	@echo "====================="
@@ -26,3 +28,9 @@ test-static:
 	@echo "Running test static"
 	@echo "====================="
 	docker-compose -f docker-compose.builder.yaml run --rm app-builder bash -c 'cd ${DOCKER_WORK_DIR} && php-cs-fixer fix src tests database --config=.php_cs --dry-run --using-cache=no'
+
+test-functional:
+	@echo "====================="
+	@echo "Running test functional"
+	@echo "====================="
+	docker-compose -f docker-compose.builder.yaml run --rm app-builder bash -c 'cd ${DOCKER_WORK_DIR} && php ./vendor/bin/phpunit --configuration=phpunit.functional.xml'
