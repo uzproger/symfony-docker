@@ -12,12 +12,7 @@ RUN apt-get update \
     debconf \
     subversion \
     git \
-    wget \
-    python3-pip \
-    python3-setuptools \
-    python3-wheel \
-    && pip3 install \
-    ansible
+    wget
 
 RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls \
     && mv composer.phar /usr/local/bin/composer

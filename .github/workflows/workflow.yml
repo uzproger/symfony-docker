@@ -1,0 +1,21 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build env
+        run: make start
+      - name: Generate env files
+        run: cp .env.dist .env
+      - name: Install Dependencies
+        run: make composer-install
+      - name: Sleep 10
+        run: sleep 10
+      - name: Run static test
+        run: make test-static
+      - name: Run functional tests
+        run: make test-functional
