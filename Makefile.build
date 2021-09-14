@@ -11,6 +11,18 @@ composer-install:
 	@echo "====================="
 	docker-compose -f docker-compose.builder.yaml run --rm app-builder bash -c 'cd ${DOCKER_WORK_DIR} && composer install ${COMPOSER_OPTIONS}'
 
+yarn-install:
+	@echo "====================="
+	@echo "Webpack"
+	@echo "====================="
+	docker-compose -f docker-compose.builder.yaml run --rm app-builder bash -c 'cd ${DOCKER_WORK_DIR} && yarn install'
+
+yarn-build:
+	@echo "====================="
+	@echo "Webpack"
+	@echo "====================="
+	docker-compose -f docker-compose.builder.yaml run --rm app-builder bash -c 'cd ${DOCKER_WORK_DIR} && yarn build'
+
 clear-cache:
 	@echo "====================="
 	@echo "Clear cache"

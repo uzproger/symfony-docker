@@ -15,6 +15,6 @@ final class DefaultController extends AbstractController
      */
     public function home(): Response
     {
-        return new Response('<h1>Hello Symfony!!!</h1>');
+        return $this->render('home/home.html.twig');
     }
 }
