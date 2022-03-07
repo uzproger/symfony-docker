@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM php:8.1-fpm
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends build-essential libzip-dev zip zlib1g-dev libicu-dev unzip g++
@@ -20,7 +20,7 @@ RUN apt-get install -y nodejs && npm install -g yarn
 RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls \
     && mv composer.phar /usr/local/bin/composer
 
-RUN wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.16.7/php-cs-fixer.phar -O php-cs-fixer
+RUN wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v3.4.0/php-cs-fixer.phar -O php-cs-fixer
 RUN chmod a+x php-cs-fixer && mv php-cs-fixer /usr/local/bin/php-cs-fixer
 
 RUN apt-get purge -y --auto-remove \

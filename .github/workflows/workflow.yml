@@ -13,10 +13,8 @@ jobs:
         run: cp .env.dist .env
       - name: Install Dependencies
         run: make composer-install
-      - name: Install frontend packages
-        run: make yarn-install && make yarn-build
-      - name: Sleep 10
-        run: sleep 10
+      - name: Sleep 5
+        run: sleep 5
       - name: Run static test
         run: make test-static
       - name: Run functional tests

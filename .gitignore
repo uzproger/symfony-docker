@@ -63,7 +63,7 @@
 
 .idea
 .env
-.php_cs.cache
+.php-cs-fixer.cache
 
 ###> symfony/phpunit-bridge ###
 .phpunit.result.cache
@@ -74,10 +74,3 @@
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
-
-###> symfony/webpack-encore-bundle ###
-/node_modules/
-/public/build/
-npm-debug.log
-yarn-error.log
-###< symfony/webpack-encore-bundle ###
