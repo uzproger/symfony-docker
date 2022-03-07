@@ -1,4 +1,4 @@
-# symfony5-docker
+# symfony6-docker
 symfony6 docker
 
 ### Docker
