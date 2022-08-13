@@ -6,5 +6,9 @@ RUN apt-get update \
 RUN docker-php-ext-install pdo pdo_mysql zip
 RUN docker-php-ext-configure intl && docker-php-ext-install intl
 
+RUN pecl install apcu;
+RUN pecl clear-cache;
+RUN docker-php-ext-enable apcu opcache
+
 EXPOSE 9000
 CMD ["php-fpm"]

@@ -3,15 +3,41 @@
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 final class DefaultControllerTest extends WebTestCase
 {
-    public function testHome(): void
+    public function testRedirectToLogin(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/');
+        $client->request('GET', '/');
+        $this->assertEquals(
+            Response::HTTP_FOUND,
+            $client->getResponse()->getStatusCode()
+        );
 
-        $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Hello Symfony!!!');
+        $crawler = $client->followRedirect();
+        $this->assertEquals(
+            Response::HTTP_OK,
+            $client->getResponse()->getStatusCode()
+        );
+        $this->assertStringEndsWith(
+            '/login',
+            $crawler->getUri(),
+        );
+
+        $client->submitForm('Login', [
+            '_username' => 'test',
+            '_password' => 'test',
+        ]);
+        $crawler = $client->followRedirect();
+        $this->assertEquals(
+            Response::HTTP_OK,
+            $client->getResponse()->getStatusCode()
+        );
+        $this->assertEquals(
+            'Hello Symfony!!!',
+            $crawler->filter('h1')->text()
+        );
     }
 }
