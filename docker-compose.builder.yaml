@@ -1,8 +1,7 @@
 version: "3"
 
 services:
-  app-builder:
-    container_name: app-builder
+  builder:
     build:
       context: docker/builder
       dockerfile: Dockerfile

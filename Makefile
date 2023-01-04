@@ -1,4 +1,7 @@
-ENV ?= dev
+include .env
+export
+
+ENV ?= ${APP_ENV}
 DOCKER_COMPOSE_FILE ?= docker-compose.yaml
 DOCKER_WORK_DIR ?= /var/www/html
 

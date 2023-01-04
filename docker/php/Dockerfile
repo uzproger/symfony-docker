@@ -1,4 +1,4 @@
-FROM php:8.1-fpm
+FROM php:8.1.13-fpm
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends build-essential libzip-dev zip zlib1g-dev libicu-dev unzip g++
