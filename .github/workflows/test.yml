@@ -1,4 +1,4 @@
-name: CI
+name: "Build and test"
 
 on: [push]
 
@@ -17,8 +17,6 @@ jobs:
         run: sleep 5
       - name: Run static test
         run: make test-static
-      - name: Setup test db
-        run: make create-test-database
       - name: Run db migrations
         run: ENV=test make migration-up
       - name: Run functional tests
