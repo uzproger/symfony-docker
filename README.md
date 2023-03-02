@@ -13,6 +13,13 @@ To destroy containers:
 make rm
 ```
 
+### Composer
+To install packages:
+
+```
+make composer-install
+```
+
 ### Database migrations
 To run migration
 
