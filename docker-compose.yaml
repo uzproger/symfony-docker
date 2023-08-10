@@ -1,24 +1,14 @@
 version: "3"
 
 services:
-  nginx:
+  app:
     build:
-      context: docker/nginx
+      context: docker/app
       dockerfile: Dockerfile
     ports:
-      - "8000:80"
+      - 8000:8080
     volumes:
       - .:/var/www/html
-    links:
-      - php
-  php:
-    build:
-      context: docker/php
-      dockerfile: Dockerfile
-    volumes:
-      - .:/var/www/html
-    ports:
-      - "9000"
     links:
       - mysql
   mysql:

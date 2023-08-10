@@ -9,46 +9,46 @@ composer-install:
 	@echo "====================="
 	@echo "Composer install"
 	@echo "====================="
-	docker-compose -f docker-compose.builder.yaml run -e APP_ENV=${APP_ENV} --rm builder bash -c 'cd ${DOCKER_WORK_DIR} && composer install ${COMPOSER_OPTIONS}'
+	docker-compose -f docker-compose.builder.yaml run -e APP_ENV=${APP_ENV} --rm builder sh -c 'cd ${DOCKER_WORK_DIR} && composer install ${COMPOSER_OPTIONS}'
 
 clear-cache:
 	@echo "====================="
 	@echo "Clear cache"
 	@echo "====================="
-	docker-compose exec -T php php ./bin/console cache:clear --env=${ENV}
+	docker-compose exec -T app php ./bin/console cache:clear --env=${ENV}
 
 php-cs-fix:
 	@echo "====================="
 	@echo "Running test static"
 	@echo "====================="
-	docker-compose -f docker-compose.builder.yaml run --rm builder bash -c 'cd ${DOCKER_WORK_DIR} && php-cs-fixer fix src tests database --config=.php-cs-fixer.php'
+	docker-compose -f docker-compose.builder.yaml run --rm builder sh -c 'cd ${DOCKER_WORK_DIR} && php-cs-fixer fix src tests database --config=.php-cs-fixer.php'
 
 test-static:
 	@echo "====================="
 	@echo "Running test static"
 	@echo "====================="
-	docker-compose -f docker-compose.builder.yaml run --rm builder bash -c 'cd ${DOCKER_WORK_DIR} && php-cs-fixer fix src tests database --config=.php-cs-fixer.php --dry-run --using-cache=no'
+	docker-compose -f docker-compose.builder.yaml run --rm builder sh -c 'cd ${DOCKER_WORK_DIR} && php-cs-fixer fix src tests database --config=.php-cs-fixer.php --dry-run --using-cache=no'
 
 test-functional:
 	@echo "====================="
 	@echo "Running test functional"
 	@echo "====================="
-	docker-compose exec -T php php ./vendor/bin/phpunit --configuration=phpunit.functional.xml
+	docker-compose exec -T app php ./vendor/bin/phpunit --configuration=phpunit.functional.xml
 
 migration-up:
 	@echo "====================="
 	@echo "Run migration"
 	@echo "====================="
-	docker-compose exec -T php php ./bin/console doctrine:migrations:migrate -n --env=${ENV}
+	docker-compose exec -T app php ./bin/console doctrine:migrations:migrate -n --env=${ENV}
 
 migration-down:
 	@echo "====================="
 	@echo "Run migration"
 	@echo "====================="
-	docker-compose exec -T php php ./bin/console doctrine:migrations:migrate prev -n --env=${ENV}
+	docker-compose exec -T app php ./bin/console doctrine:migrations:migrate prev -n --env=${ENV}
 
 migration-generate:
 	@echo "====================="
 	@echo "Generate new migration"
 	@echo "====================="
-	docker-compose exec -T php php ./bin/console doctrine:migrations:generate
+	docker-compose exec -T app php ./bin/console doctrine:migrations:generate
