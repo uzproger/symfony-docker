@@ -151,7 +151,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Equatab
         return \array_unique($roles);
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         $this->passwordHash = '';
     }

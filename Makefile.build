@@ -11,6 +11,12 @@ composer-install:
 	@echo "====================="
 	docker-compose -f docker-compose.builder.yaml run -e APP_ENV=${APP_ENV} --rm builder sh -c 'cd ${DOCKER_WORK_DIR} && composer install ${COMPOSER_OPTIONS}'
 
+composer-require:
+	@echo "====================="
+	@echo "Composer require"
+	@echo "====================="
+	docker-compose -f docker-compose.builder.yaml run -e APP_ENV=${APP_ENV} --rm builder sh -c 'cd ${DOCKER_WORK_DIR} && composer require $args'
+
 clear-cache:
 	@echo "====================="
 	@echo "Clear cache"
